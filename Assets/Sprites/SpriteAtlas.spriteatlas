@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SpriteAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: Android
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 50
+      m_TextureCompression: 1
+      m_CompressionQuality: 100
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: eda0eebfa92fe4641ab0daab1bb1e5a0, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: ac58b600a4c3c5c4c92ba7a8c9049cc9, type: 3}
+  - {fileID: 21300000, guid: 772240a0dc4023a45af7124906721160, type: 3}
+  - {fileID: 21300000, guid: dfc467a025315cb44b003df18416126d, type: 3}
+  - {fileID: 21300000, guid: d40276b07ba3ff843826950b5a104698, type: 3}
+  - {fileID: 21300000, guid: fb66cf41123331549bd842d5ee702d5f, type: 3}
+  - {fileID: 21300000, guid: 010a6e5305fa7004f89c5d317b7b47d4, type: 3}
+  - {fileID: 21300000, guid: 26220de59d67db84f922ba4739029c99, type: 3}
+  - {fileID: 21300000, guid: 3f0186772829f23479809b2f0477dded, type: 3}
+  - {fileID: 21300000, guid: ea46f2f74aeda9d41bb0329cd0507055, type: 3}
+  - {fileID: 21300000, guid: 416a82793321241438bebebadc78436a, type: 3}
+  - {fileID: 21300000, guid: c8bbd02a88c2bbc41b7d7e50ec7b2aa7, type: 3}
+  - {fileID: 21300000, guid: 5b56d9fa0e8bd6e409ed188db38a692c, type: 3}
+  - {fileID: 21300000, guid: 9a8e023b5e66b0d478386a07d1627765, type: 3}
+  - {fileID: 21300000, guid: 4e5becdb9db2b1242831fb0a180f00c2, type: 3}
+  - {fileID: 21300000, guid: 062b7d4c425eb354fabf68f98b2a76c5, type: 3}
+  - {fileID: 21300000, guid: 744eef1f9d0db2c419465e2a811ea151, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - 43
+  - Checkmark
+  - 44
+  - kindpng_3799530
+  - Icon16
+  - Handle_Plain
+  - 13
+  - circle
+  - 580b57fcd9996e24bc43c43d
+  - 11
+  - Bar
+  - AllAxis_Outline
+  - Heart
+  - CoolDown
+  - 36
+  - Pause
+  m_RenderDataMap: {}
+  m_Tag: SpriteAtlas
+  m_IsVariant: 0
