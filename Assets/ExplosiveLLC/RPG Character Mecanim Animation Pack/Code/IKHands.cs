@@ -41,7 +41,7 @@ namespace RPGCharacterAnims
 		/// <summary>
 		/// Smoothly blend IK on and off so there's no snapping into position.
 		/// </summary>
-		public void BlendIK(bool blendOn, float delay, float timeToBlend, Weapon weapon)
+		public void BlendIK(bool blendOn, float delay, float timeToBlend, Weaponn weapon)
 		{
             // If using 2 handed weapon.
 			if (weapon.Is2HandedWeapon()) {
@@ -54,7 +54,7 @@ namespace RPGCharacterAnims
 			if (!blendOn) { isUsed = false; }
 		}
 
-		private IEnumerator _BlendIK(bool blendOn, float delay, float timeToBlend, Weapon weapon)
+		private IEnumerator _BlendIK(bool blendOn, float delay, float timeToBlend, Weaponn weapon)
         {
             GetCurrentWeaponAttachPoint(weapon);
 			yield return new WaitForSeconds(delay);
@@ -102,15 +102,15 @@ namespace RPGCharacterAnims
 			}
 		}
 
-		private void GetCurrentWeaponAttachPoint(Weapon weapon)
+		private void GetCurrentWeaponAttachPoint(Weaponn weapon)
 		{
-			var weaponType = (Weapon)weapon;
+			var weaponType = (Weaponn)weapon;
 			switch (weaponType) {
-				case Weapon.TwoHandSword: blendToTransform = rpgCharacterWeaponController.twoHandSword.transform.GetChild(0).transform; break;
-				case Weapon.TwoHandSpear: blendToTransform = rpgCharacterWeaponController.twoHandSpear.transform.GetChild(0).transform; break;
-				case Weapon.TwoHandAxe: blendToTransform = rpgCharacterWeaponController.twoHandAxe.transform.GetChild(0).transform; break;
-				case Weapon.TwoHandCrossbow: blendToTransform = rpgCharacterWeaponController.twoHandCrossbow.transform.GetChild(0).transform; break;
-				case Weapon.Rifle: blendToTransform = rpgCharacterWeaponController.rifle.transform.GetChild(0).transform; break;
+				case Weaponn.TwoHandSword: blendToTransform = rpgCharacterWeaponController.twoHandSword.transform.GetChild(0).transform; break;
+				case Weaponn.TwoHandSpear: blendToTransform = rpgCharacterWeaponController.twoHandSpear.transform.GetChild(0).transform; break;
+				case Weaponn.TwoHandAxe: blendToTransform = rpgCharacterWeaponController.twoHandAxe.transform.GetChild(0).transform; break;
+				case Weaponn.TwoHandCrossbow: blendToTransform = rpgCharacterWeaponController.twoHandCrossbow.transform.GetChild(0).transform; break;
+				case Weaponn.Rifle: blendToTransform = rpgCharacterWeaponController.rifle.transform.GetChild(0).transform; break;
 			}
 		}
     }

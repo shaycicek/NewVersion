@@ -90,7 +90,7 @@ namespace RPGCharacterAnims
         /// </summary>
         /// <param name="weapon">Weapon to unsheath.</param>
         /// <param name="dual">Whether to unsheath the same weapon in the other hand.</param>
-        public void UnsheathWeapon(Weapon weapon, bool dual)
+        public void UnsheathWeapon(Weaponn weapon, bool dual)
         {
 			if (debugWalkthrough) { Debug.Log("UnsheathWeapon:" + weapon + " dual:" + dual); }
             if (dual) { coroQueue.RunCallback(() => { dualSwitch = true; }); }
@@ -103,7 +103,7 @@ namespace RPGCharacterAnims
         /// </summary>
         /// <param name="weapon">Weapon to unsheath.</param>
         /// <returns>IEnumerator for use with StartCoroutine.</returns>
-        private IEnumerator _UnSheathWeapon(Weapon weapon)
+        private IEnumerator _UnSheathWeapon(Weaponn weapon)
         {
 			if (!dualSwitch) {
 				if (debugWalkthrough) { Debug.Log($"UnsheathWeapon - weapon:{weapon} dualSwitch:{dualSwitch}"); }
@@ -112,7 +112,7 @@ namespace RPGCharacterAnims
             isWeaponSwitching = true;
 
 			var currentAnimatorWeapon = ( AnimatorWeapon )animator.GetInteger(AnimationParameters.Weapon);
-			var currentWeaponType = (Weapon) animator.GetInteger(AnimationParameters.Weapon);
+			var currentWeaponType = (Weaponn) animator.GetInteger(AnimationParameters.Weapon);
 
             // If Dual Switching.
             if (dualSwitch) {
@@ -121,13 +121,13 @@ namespace RPGCharacterAnims
             }
 
             // Switching to Unarmed from Relax.
-            if (weapon == Weapon.Unarmed) {
+            if (weapon == Weaponn.Unarmed) {
 				if (debugWalkthrough) { Debug.Log("Switching to Unarmed from Relax."); }
-                DoWeaponSwitch(( int )AnimatorWeapon.RELAX, Weapon.Relax, AnimatorWeapon.RELAX, Side.None, false);
+                DoWeaponSwitch(( int )AnimatorWeapon.RELAX, Weaponn.Relax, AnimatorWeapon.RELAX, Side.None, false);
 
 				// Wait for WeaponSwitch() to happen then update Animator.
 				yield return new WaitForSeconds(0.1f);
-				SetWeaponWithDebug(AnimatorWeapon.UNARMED, -2, Weapon.Unarmed, Weapon.Unarmed, Side.None);
+				SetWeaponWithDebug(AnimatorWeapon.UNARMED, -2, Weaponn.Unarmed, Weaponn.Unarmed, Side.None);
             }
 
             // Switching to 2Handed weapon.
@@ -141,14 +141,14 @@ namespace RPGCharacterAnims
 
 					// Wait for WeaponSwitch() to happen then update Animator.
 					yield return new WaitForSeconds(0.75f);
-					SetWeaponWithDebug(weapon.ToAnimatorWeapon(), -2, currentWeaponType, Weapon.Unarmed, Side.Unchanged);
+					SetWeaponWithDebug(weapon.ToAnimatorWeapon(), -2, currentWeaponType, Weaponn.Unarmed, Side.Unchanged);
 				}
 				else {
                     DoWeaponSwitch(( int )currentWeaponType, weapon, weapon.ToAnimatorWeapon(), Side.Unchanged, false);
 
 					// Wait for WeaponSwitch() to happen then update Animator.
 					yield return new WaitForSeconds(0.75f);
-					SetWeaponWithDebug(weapon.ToAnimatorWeapon(), -2, weapon, Weapon.Unarmed, Side.Unchanged);
+					SetWeaponWithDebug(weapon.ToAnimatorWeapon(), -2, weapon, Weaponn.Unarmed, Side.Unchanged);
 				}
 			}
 
@@ -160,7 +160,7 @@ namespace RPGCharacterAnims
                 if (weapon.IsLeftHandedWeapon()) {
 
 					// If Unsheathing Shield.
-					if (weapon == Weapon.Shield) {
+					if (weapon == Weaponn.Shield) {
 						if (debugWalkthrough) { Debug.Log("Unsheathing Shield."); }
 						animator.SetInteger("LeftWeapon", 7);
 						DoWeaponSwitch(( int )currentAnimatorWeapon, weapon, AnimatorWeapon.ARMED, Side.Left, false);
@@ -189,7 +189,7 @@ namespace RPGCharacterAnims
 		/// </summary>
 		/// <param name="weapon">Weapon number to unsheath.</param>
 		/// <returns>IEnumerator for use with StartCoroutine.</returns>
-		public IEnumerator _DualUnSheath(Weapon weapon)
+		public IEnumerator _DualUnSheath(Weaponn weapon)
 		{
 			if (debugWalkthrough) { Debug.Log($"_DualUnSheath:{weapon}"); }
 			var currentAnimatorWeapon = ( AnimatorWeapon )animator.GetInteger(AnimationParameters.Weapon);
@@ -197,7 +197,7 @@ namespace RPGCharacterAnims
 			DoWeaponSwitch(( int )AnimatorWeapon.ARMED, weapon, currentAnimatorWeapon, Side.Dual, false);
 
 			yield return new WaitForSeconds(0.55f);
-			SetWeaponWithDebug(AnimatorWeapon.ARMED, ( int )AnimatorWeapon.ARMED, (Weapon)weapon -1, weapon, Side.Dual);
+			SetWeaponWithDebug(AnimatorWeapon.ARMED, ( int )AnimatorWeapon.ARMED, (Weaponn)weapon -1, weapon, Side.Dual);
 		}
 
 		/// <summary>
@@ -206,7 +206,7 @@ namespace RPGCharacterAnims
 		/// <param name="fromWeapon">Which weapon to sheath.</param>
 		/// <param name="toWeapon">Target weapon if immediately unsheathing new weapon.</param>
 		/// <param name="dual">Whether to sheath both weapons at once.</param>
-		public void SheathWeapon(Weapon fromWeapon, Weapon toWeapon, bool dual)
+		public void SheathWeapon(Weaponn fromWeapon, Weaponn toWeapon, bool dual)
         {
 			if (debugWalkthrough) { Debug.Log($"SheathWeapon - fromWeapon:{fromWeapon}  toWeapon:{toWeapon} dual:{dual}"); }
             if (dual) { coroQueue.RunCallback(() => { dualSwitch = true; }); }
@@ -220,13 +220,13 @@ namespace RPGCharacterAnims
         /// <param name="weaponToSheath">Which weapon to sheath.</param>
         /// <param name="weaponToUnsheath">Target weapon if immediately unsheathing a new weapon.</param>
         /// <returns>IEnumerator for use with StartCoroutine.</returns>
-        public IEnumerator _SheathWeapon(Weapon weaponToSheath, Weapon weaponToUnsheath)
+        public IEnumerator _SheathWeapon(Weaponn weaponToSheath, Weaponn weaponToUnsheath)
         {
 			if (!dualSwitch) {
 				if (debugWalkthrough) { Debug.Log($"Sheath Weapon - weaponToSheath:{weaponToSheath}  weaponToUnsheath:{weaponToUnsheath}"); }
 			}
 
-            var currentWeaponType = (Weapon) animator.GetInteger(AnimationParameters.Weapon);
+            var currentWeaponType = (Weaponn) animator.GetInteger(AnimationParameters.Weapon);
 			var currentAnimatorWeapon = ( AnimatorWeapon )animator.GetInteger(AnimationParameters.Weapon);
 
 			// Reset for animation events.
@@ -273,14 +273,14 @@ namespace RPGCharacterAnims
 
 							// Set Left Weapon.
 							if (weaponToSheath.IsLeftHandedWeapon())
-							{ SetWeaponWithDebug(AnimatorWeapon.ARMED, -2, Weapon.Unarmed, rpgCharacterController.rightWeapon, Side.Right); }
+							{ SetWeaponWithDebug(AnimatorWeapon.ARMED, -2, Weaponn.Unarmed, rpgCharacterController.rightWeapon, Side.Right); }
 
 							// Set Right Weapon.
 							else if (weaponToSheath.IsRightHandedWeapon())
-							{ SetWeaponWithDebug(AnimatorWeapon.ARMED, -2, rpgCharacterController.leftWeapon, Weapon.Unarmed, Side.Left); }
+							{ SetWeaponWithDebug(AnimatorWeapon.ARMED, -2, rpgCharacterController.leftWeapon, Weaponn.Unarmed, Side.Left); }
 						}
 						// Just switching 1 weapon.
-						else { SetWeaponWithDebug(weaponToUnsheath.ToAnimatorWeapon(), -2, Weapon.Unarmed, Weapon.Unarmed, Side.None); }
+						else { SetWeaponWithDebug(weaponToUnsheath.ToAnimatorWeapon(), -2, Weaponn.Unarmed, Weaponn.Unarmed, Side.None); }
 					}
                     // Sheath 2Handed weapon.
                     else {
@@ -289,7 +289,7 @@ namespace RPGCharacterAnims
 
 						// Wait for WeaponSwitch() to happen then update Animator.
 						yield return new WaitForSeconds(0.55f);
-						SetWeaponWithDebug(weaponToUnsheath.ToAnimatorWeapon(), -2, Weapon.Unarmed, Weapon.Unarmed, Side.Unchanged);
+						SetWeaponWithDebug(weaponToUnsheath.ToAnimatorWeapon(), -2, Weaponn.Unarmed, Weaponn.Unarmed, Side.Unchanged);
 					}
 				}
                 // Unarmed, switching to Relax.
@@ -299,7 +299,7 @@ namespace RPGCharacterAnims
 
 					// Wait for WeaponSwitch() to happen then update Animator.
 					yield return new WaitForSeconds(0.1f);
-					SetWeaponWithDebug(AnimatorWeapon.RELAX, -2, Weapon.Relax, Weapon.Relax, Side.None);
+					SetWeaponWithDebug(AnimatorWeapon.RELAX, -2, Weaponn.Relax, Weaponn.Relax, Side.None);
 				}
 			}
             // Switching to 2Handed Weapon.
@@ -313,7 +313,7 @@ namespace RPGCharacterAnims
 
 					// Wait for WeaponSwitch() to happen then update Animator.
 					yield return new WaitForSeconds(0.55f);
-					SetWeaponWithDebug(AnimatorWeapon.UNARMED, -2, Weapon.Unarmed, Weapon.Unarmed, Side.Unchanged);
+					SetWeaponWithDebug(AnimatorWeapon.UNARMED, -2, Weaponn.Unarmed, Weaponn.Unarmed, Side.Unchanged);
                 }
 
                 // Switching from 2Handed Weapon.
@@ -323,7 +323,7 @@ namespace RPGCharacterAnims
 
 					// Wait for WeaponSwitch() to happen then update Animator.
 					yield return new WaitForSeconds(0.55f);
-					SetWeaponWithDebug(AnimatorWeapon.UNARMED, -2, Weapon.Unarmed, Weapon.Unarmed, Side.Unchanged);
+					SetWeaponWithDebug(AnimatorWeapon.UNARMED, -2, Weaponn.Unarmed, Weaponn.Unarmed, Side.Unchanged);
 				}
 			}
             // Switching to 1Handed weapons.
@@ -335,7 +335,7 @@ namespace RPGCharacterAnims
 
 					// Wait for WeaponSwitch() to happen then update Animator.
 					yield return new WaitForSeconds(0.55f);
-					SetWeaponWithDebug(AnimatorWeapon.UNARMED, -2, Weapon.Unarmed, Weapon.Unarmed, Side.None);
+					SetWeaponWithDebug(AnimatorWeapon.UNARMED, -2, Weaponn.Unarmed, Weaponn.Unarmed, Side.None);
                 }
 
 				// Switching from 1Handed weapon.
@@ -346,9 +346,9 @@ namespace RPGCharacterAnims
 					// Wait for WeaponSwitch() to happen then update Animator.
 					yield return new WaitForSeconds(0.55f);
 					if (weaponToSheath.IsLeftHandedWeapon())
-					{ SetWeaponWithDebug(AnimatorWeapon.ARMED, ( int)AnimatorWeapon.ARMED, Weapon.Unarmed, rpgCharacterController.rightWeapon, Side.Unchanged); }
+					{ SetWeaponWithDebug(AnimatorWeapon.ARMED, ( int)AnimatorWeapon.ARMED, Weaponn.Unarmed, rpgCharacterController.rightWeapon, Side.Unchanged); }
 					else if (weaponToSheath.IsRightHandedWeapon())
-					{ SetWeaponWithDebug(AnimatorWeapon.ARMED, ( int )AnimatorWeapon.ARMED, rpgCharacterController.leftWeapon, Weapon.Unarmed, Side.Unchanged); }
+					{ SetWeaponWithDebug(AnimatorWeapon.ARMED, ( int )AnimatorWeapon.ARMED, rpgCharacterController.leftWeapon, Weaponn.Unarmed, Side.Unchanged); }
 				}
 			}
         }
@@ -359,18 +359,18 @@ namespace RPGCharacterAnims
 		/// </summary>
 		/// <param name="weaponToSheath">Weapon number to unsheath.</param>
 		/// <returns>IEnumerator for use with StartCoroutine.</returns>
-		public IEnumerator _DualSheath(Weapon weaponToSheath, Weapon weaponToUnsheath)
+		public IEnumerator _DualSheath(Weaponn weaponToSheath, Weaponn weaponToUnsheath)
 		{
 			if (debugWalkthrough) { Debug.Log($"DualSheath - weaponToSheath:{weaponToSheath}  weaponToUnsheath:{weaponToUnsheath}"); }
 
 			// If switching to Relax from Unarmed.
-			if (weaponToSheath == Weapon.Unarmed && weaponToUnsheath == Weapon.Relax) {
+			if (weaponToSheath == Weaponn.Unarmed && weaponToUnsheath == Weaponn.Relax) {
 				if (debugWalkthrough) { Debug.Log("Switching to Relax from Unarmed."); }
-				DoWeaponSwitch(-1, Weapon.Relax, AnimatorWeapon.RELAX, Side.Unchanged, true);
+				DoWeaponSwitch(-1, Weaponn.Relax, AnimatorWeapon.RELAX, Side.Unchanged, true);
 
 				// Wait for WeaponSwitch() to happen then update Animator.
 				yield return new WaitForSeconds(0.55f);
-				SetWeaponWithDebug(AnimatorWeapon.RELAX, (int)AnimatorWeapon.RELAX, Weapon.Unarmed, Weapon.Unarmed, Side.None);
+				SetWeaponWithDebug(AnimatorWeapon.RELAX, (int)AnimatorWeapon.RELAX, Weaponn.Unarmed, Weaponn.Unarmed, Side.None);
 			}
 			// Sheath 1Handed weapons.
 			else if (weaponToSheath.Is1HandedWeapon()) {
@@ -384,7 +384,7 @@ namespace RPGCharacterAnims
 					// Wait for WeaponSwitch() to happen then update Animator.
 					yield return new WaitForSeconds(0.55f);
 					StartCoroutine(_HideAllWeapons(false, false));
-					SetWeaponWithDebug(AnimatorWeapon.UNARMED, -2, Weapon.Unarmed, Weapon.Unarmed, Side.None);
+					SetWeaponWithDebug(AnimatorWeapon.UNARMED, -2, Weaponn.Unarmed, Weaponn.Unarmed, Side.None);
 				}
 				// Switching to other 1Handed weapons.
 				else if (weaponToUnsheath.Is1HandedWeapon()) {
@@ -394,7 +394,7 @@ namespace RPGCharacterAnims
 					// Wait for WeaponSwitch() to happen then update Animator.
 					yield return new WaitForSeconds(0.55f);
 					StartCoroutine(_HideAllWeapons(false, false));
-					SetWeaponWithDebug(AnimatorWeapon.UNARMED, ( int )AnimatorWeapon.UNARMED, Weapon.Unarmed, Weapon.Unarmed, Side.Dual);
+					SetWeaponWithDebug(AnimatorWeapon.UNARMED, ( int )AnimatorWeapon.UNARMED, Weaponn.Unarmed, Weaponn.Unarmed, Side.Dual);
 				}
 				// Switching to Unarmed/Relax.
 				else if (weaponToUnsheath.HasNoWeapon()) {
@@ -404,7 +404,7 @@ namespace RPGCharacterAnims
 					// Wait for WeaponSwitch() to happen then update Animator.
 					yield return new WaitForSeconds(0.55f);
 					StartCoroutine(_HideAllWeapons(false, false));
-					SetWeaponWithDebug(weaponToUnsheath.ToAnimatorWeapon(), -2, Weapon.Unarmed, Weapon.Unarmed, Side.None);
+					SetWeaponWithDebug(weaponToUnsheath.ToAnimatorWeapon(), -2, Weaponn.Unarmed, Weaponn.Unarmed, Side.None);
 				}
 			}
 		}
@@ -415,10 +415,10 @@ namespace RPGCharacterAnims
 		/// <param name="weaponFrom">Existing weapon switching from.</param>
 		/// <param name="weaponTo">Weapon switching to.</param>
 		/// <param name="side">Weapon side.</param>
-		public void SheathAndUnSheath(Weapon weaponFrom, Weapon weaponTo, Side side)
+		public void SheathAndUnSheath(Weaponn weaponFrom, Weaponn weaponTo, Side side)
 		{ StartCoroutine(_SheathAndUnSheath(weaponFrom, weaponTo, side)); }
 
-		private IEnumerator _SheathAndUnSheath(Weapon weaponFrom, Weapon weaponTo, Side side)
+		private IEnumerator _SheathAndUnSheath(Weaponn weaponFrom, Weaponn weaponTo, Side side)
 		{
 			if (debugWalkthrough) { Debug.Log($"SheathAndUnSheath - weaponFrom:{weaponFrom}  weaponTo:{weaponTo}  side:{ side}"); }
 
@@ -443,10 +443,10 @@ namespace RPGCharacterAnims
 		/// <param name="weaponFrom">Existing weapon switching from.</param>
 		/// <param name="weaponTo">Weapon switching to.</param>
 		/// <param name="side">Weapon side.</param>
-		public void DualSheathAndUnSheath(Weapon weaponFrom, Weapon weaponTo, Side side)
+		public void DualSheathAndUnSheath(Weaponn weaponFrom, Weaponn weaponTo, Side side)
 		{ StartCoroutine(_DualSheathAndUnSheath(weaponFrom, weaponTo, side)); }
 
-		private IEnumerator _DualSheathAndUnSheath(Weapon weaponFrom, Weapon weaponTo, Side side)
+		private IEnumerator _DualSheathAndUnSheath(Weaponn weaponFrom, Weaponn weaponTo, Side side)
 		{
 			if (debugWalkthrough) { Debug.Log($"DualSheathAndUnSheath - weaponFrom:{weaponFrom}  weaponTo:{weaponTo}"); }
 
@@ -471,7 +471,7 @@ namespace RPGCharacterAnims
         /// Switch to the weapon number instantly.
         /// </summary>
         /// <param name="weapon">Weapon to switch to.</param>
-        public void InstantWeaponSwitch(Weapon weapon)
+        public void InstantWeaponSwitch(Weaponn weapon)
         { coroQueue.Run(_InstantWeaponSwitch(weapon)); }
 
 		/// <summary>
@@ -480,7 +480,7 @@ namespace RPGCharacterAnims
 		/// <param name="weaponNumber">Weapon number to switch to.</param>
 		/// <returns>IEnumerator for use with StartCoroutine.</returns>
 		/// /// <summary>
-		public IEnumerator _InstantWeaponSwitch(Weapon weapon)
+		public IEnumerator _InstantWeaponSwitch(Weaponn weapon)
 		{
 			if (debugWalkthrough) { Debug.Log($"_InstantWeaponSwitch:{weapon}"); }
 			animator.SetAnimatorTrigger(AnimatorTrigger.InstantSwitchTrigger);
@@ -531,26 +531,26 @@ namespace RPGCharacterAnims
 
 				// 2Handed weapons map directly to AnimatorWeapon.
 				animator.SetInteger(AnimationParameters.Weapon, ( int )weapon);
-				rpgCharacterController.rightWeapon = Weapon.Unarmed;
-				rpgCharacterController.leftWeapon = Weapon.Unarmed;
+				rpgCharacterController.rightWeapon = Weaponn.Unarmed;
+				rpgCharacterController.leftWeapon = Weaponn.Unarmed;
 				animator.SetInteger(AnimationParameters.LeftWeapon, 0);
 				animator.SetInteger(AnimationParameters.RightWeapon, 0);
 				StartCoroutine(_HideAllWeapons(false, false));
 				StartCoroutine(_WeaponVisibility(weapon, true, false));
 
 				if (weapon.IsIKWeapon())
-				{ rpgCharacterController.SetIKOn(( Weapon )animator.GetInteger(AnimationParameters.Weapon)); }
+				{ rpgCharacterController.SetIKOn(( Weaponn )animator.GetInteger(AnimationParameters.Weapon)); }
 			}
 			// Switching to Unarmed or Relax which map directly.
 			else {
-				if (weapon == Weapon.Unarmed) {
-					rpgCharacterController.rightWeapon = Weapon.Unarmed;
-					rpgCharacterController.leftWeapon = Weapon.Unarmed;
+				if (weapon == Weaponn.Unarmed) {
+					rpgCharacterController.rightWeapon = Weaponn.Unarmed;
+					rpgCharacterController.leftWeapon = Weaponn.Unarmed;
 					animator.SetInteger(AnimationParameters.Weapon, 0);
 				}
 				else {
-					rpgCharacterController.rightWeapon = Weapon.Relax;
-					rpgCharacterController.leftWeapon = Weapon.Relax;
+					rpgCharacterController.rightWeapon = Weaponn.Relax;
+					rpgCharacterController.leftWeapon = Weaponn.Relax;
 					animator.SetInteger(AnimationParameters.Weapon, -1);
 				}
 				animator.SetInteger(AnimationParameters.LeftWeapon, 0);
@@ -568,7 +568,7 @@ namespace RPGCharacterAnims
 		/// <param name="animatorWeapon">Weapon enum switching to.</param>
 		/// <param name="side">Weapon side. -1=Leave existing, 1=Left, 2=Right, 3=Dual</param>
 		/// <param name="sheath">"sheath" or "unsheath".</param>
-		private void DoWeaponSwitch(int weaponSwitch, Weapon weapon, AnimatorWeapon animatorWeapon, Side side, bool sheath)
+		private void DoWeaponSwitch(int weaponSwitch, Weaponn weapon, AnimatorWeapon animatorWeapon, Side side, bool sheath)
 		{
 			if (debugDoWeaponSwitch)
 			{ Debug.Log($"DO WEAPON SWITCH - weaponSwitch:{weaponSwitch}  weapon:{weapon}  animatorWeapon:{animatorWeapon}  side:{side}  sheath:{sheath}"); }
@@ -612,7 +612,7 @@ namespace RPGCharacterAnims
 		/// <param name="leftWeapon">Left weapon number. Use Weapon.cs enum.</param>
 		/// <param name="rightWeapon">Right weapon number. Use Weapon.cs enum.</param>
 		/// <param name="weaponSide">Weapon side: 0-None, 1-Left, 2-Right, 3-Dual.</param>
-		private void SetWeaponWithDebug(AnimatorWeapon animatorWeapon, int weaponSwitch, Weapon leftWeapon, Weapon rightWeapon, Side weaponSide)
+		private void SetWeaponWithDebug(AnimatorWeapon animatorWeapon, int weaponSwitch, Weaponn leftWeapon, Weaponn rightWeapon, Side weaponSide)
 		{
 			if (debugSetAnimator) { Debug.Log($"SET ANIMATOR - Weapon:{animatorWeapon}  WeaponSwitch:{weaponSwitch}  Lweapon:{leftWeapon}  Rweapon:{rightWeapon}  Weaponside:{weaponSide}"); }
 
@@ -657,8 +657,8 @@ namespace RPGCharacterAnims
             // Reset to Unarmed if not in Relax.
             if (resetToUnarmed && !rpgCharacterController.isRelaxed) {
                 animator.SetInteger(AnimationParameters.Weapon, 0);
-                rpgCharacterController.rightWeapon = Weapon.Unarmed;
-                rpgCharacterController.leftWeapon = Weapon.Unarmed;
+                rpgCharacterController.rightWeapon = Weaponn.Unarmed;
+                rpgCharacterController.leftWeapon = Weaponn.Unarmed;
                 StartCoroutine(_WeaponVisibility(rpgCharacterController.leftWeapon, false, true));
                 animator.SetInteger(AnimationParameters.RightWeapon, 0);
                 animator.SetInteger(AnimationParameters.LeftWeapon, 0);
@@ -691,68 +691,68 @@ namespace RPGCharacterAnims
         /// <param name="weaponNumber">Weapon object to set.</param>
         /// <param name="visible">Whether to set it visible or not.</param>
         /// <param name="dual">Whether to update the same weapon in the other hand as well.</param>
-        public IEnumerator _WeaponVisibility(Weapon weaponNumber, bool visible, bool dual)
+        public IEnumerator _WeaponVisibility(Weaponn weaponNumber, bool visible, bool dual)
         {
 			if (debugWeaponVisibility) { Debug.Log($"WeaponVisibility:{weaponNumber}   Visible:{visible}   Dual:{dual}"); }
 
 			while (isWeaponSwitching) { yield return null; }
-            var weaponType = (Weapon)weaponNumber;
+            var weaponType = (Weaponn)weaponNumber;
 			switch (weaponType) {
-				case Weapon.TwoHandSword: SafeSetVisibility(twoHandSword, visible); break;
-				case Weapon.TwoHandSpear: SafeSetVisibility(twoHandSpear, visible); break;
-				case Weapon.TwoHandAxe: SafeSetVisibility(twoHandAxe, visible); break;
-				case Weapon.TwoHandBow: SafeSetVisibility(twoHandBow, visible); break;
-				case Weapon.TwoHandCrossbow: SafeSetVisibility(twoHandCrossbow, visible); break;
-				case Weapon.TwoHandStaff: SafeSetVisibility(staff, visible); break;
-				case Weapon.Shield: SafeSetVisibility(shield, visible); break;
-				case Weapon.Rifle: SafeSetVisibility(rifle, visible); break;
-				case Weapon.RightSpear: SafeSetVisibility(spear, visible); break;
-				case Weapon.LeftSword: {
+				case Weaponn.TwoHandSword: SafeSetVisibility(twoHandSword, visible); break;
+				case Weaponn.TwoHandSpear: SafeSetVisibility(twoHandSpear, visible); break;
+				case Weaponn.TwoHandAxe: SafeSetVisibility(twoHandAxe, visible); break;
+				case Weaponn.TwoHandBow: SafeSetVisibility(twoHandBow, visible); break;
+				case Weaponn.TwoHandCrossbow: SafeSetVisibility(twoHandCrossbow, visible); break;
+				case Weaponn.TwoHandStaff: SafeSetVisibility(staff, visible); break;
+				case Weaponn.Shield: SafeSetVisibility(shield, visible); break;
+				case Weaponn.Rifle: SafeSetVisibility(rifle, visible); break;
+				case Weaponn.RightSpear: SafeSetVisibility(spear, visible); break;
+				case Weaponn.LeftSword: {
 					SafeSetVisibility(swordL, visible);
 					if (dual) { SafeSetVisibility(swordR, visible); }
 					break;
 				}
-				case Weapon.RightSword: {
+				case Weaponn.RightSword: {
 					SafeSetVisibility(swordR, visible);
 					if (dual) { SafeSetVisibility(swordL, visible); }
 					break;
 				}
-				case Weapon.LeftMace: {
+				case Weaponn.LeftMace: {
 					SafeSetVisibility(maceL, visible);
 					if (dual) { SafeSetVisibility(maceR, visible); }
 					break;
 				}
-				case Weapon.RightMace: {
+				case Weaponn.RightMace: {
 					SafeSetVisibility(maceR, visible);
 					if (dual) { SafeSetVisibility(maceL, visible); }
 					break;
 				}
-				case Weapon.LeftDagger: {
+				case Weaponn.LeftDagger: {
 					SafeSetVisibility(daggerL, visible);
 					if (dual) { SafeSetVisibility(daggerR, visible); }
 					break;
 				}
-				case Weapon.RightDagger: {
+				case Weaponn.RightDagger: {
 					SafeSetVisibility(daggerR, visible);
 					if (dual) { SafeSetVisibility(daggerL, visible); }
 					break;
 				}
-				case Weapon.LeftItem: {
+				case Weaponn.LeftItem: {
 					SafeSetVisibility(itemL, visible);
 					if (dual) { SafeSetVisibility(itemR, visible); }
 					break;
 				}
-				case Weapon.RightItem: {
+				case Weaponn.RightItem: {
 					SafeSetVisibility(itemR, visible);
 					if (dual) { SafeSetVisibility(itemL, visible); }
 					break;
 				}
-				case Weapon.LeftPistol: {
+				case Weaponn.LeftPistol: {
 					SafeSetVisibility(pistolL, visible);
 					if (dual) { SafeSetVisibility(pistolR, visible); }
 					break;
 				}
-				case Weapon.RightPistol: {
+				case Weaponn.RightPistol: {
 					SafeSetVisibility(pistolR, visible);
 					if (dual) { SafeSetVisibility(pistolL, visible); }
 					break;
@@ -801,31 +801,31 @@ namespace RPGCharacterAnims
             SafeSetVisibility(rifle, false);
             SafeSetVisibility(spear, false);
 
-            var leftWeaponType = (Weapon)rpgCharacterController.leftWeapon;
+            var leftWeaponType = (Weaponn)rpgCharacterController.leftWeapon;
             switch (leftWeaponType) {
-                case Weapon.Shield: SafeSetVisibility(shield, true); break;
-                case Weapon.LeftSword: SafeSetVisibility(swordL, true); break;
-                case Weapon.LeftMace: SafeSetVisibility(maceL, true); break;
-                case Weapon.LeftDagger: SafeSetVisibility(daggerL, true); break;
-                case Weapon.LeftItem: SafeSetVisibility(itemL, true); break;
-                case Weapon.LeftPistol: SafeSetVisibility(pistolL, true); break;
+                case Weaponn.Shield: SafeSetVisibility(shield, true); break;
+                case Weaponn.LeftSword: SafeSetVisibility(swordL, true); break;
+                case Weaponn.LeftMace: SafeSetVisibility(maceL, true); break;
+                case Weaponn.LeftDagger: SafeSetVisibility(daggerL, true); break;
+                case Weaponn.LeftItem: SafeSetVisibility(itemL, true); break;
+                case Weaponn.LeftPistol: SafeSetVisibility(pistolL, true); break;
             }
 
-            var rightWeaponType = (Weapon)rpgCharacterController.rightWeapon;
+            var rightWeaponType = (Weaponn)rpgCharacterController.rightWeapon;
             switch (rightWeaponType) {
-                case Weapon.TwoHandSword: SafeSetVisibility(twoHandSword, true); break;
-                case Weapon.TwoHandSpear: SafeSetVisibility(twoHandSpear, true); break;
-                case Weapon.TwoHandAxe: SafeSetVisibility(twoHandAxe, true); break;
-                case Weapon.TwoHandBow: SafeSetVisibility(twoHandBow, true); break;
-                case Weapon.TwoHandCrossbow: SafeSetVisibility(twoHandCrossbow, true); break;
-                case Weapon.TwoHandStaff: SafeSetVisibility(staff, true); break;
-                case Weapon.RightSword: SafeSetVisibility(swordR, true); break;
-                case Weapon.RightMace: SafeSetVisibility(maceR, true); break;
-                case Weapon.RightDagger: SafeSetVisibility(daggerR, true); break;
-                case Weapon.RightItem: SafeSetVisibility(itemR, true); break;
-                case Weapon.RightPistol: SafeSetVisibility(pistolR, true); break;
-                case Weapon.Rifle: SafeSetVisibility(rifle, true); break;
-                case Weapon.RightSpear: SafeSetVisibility(spear, true); break;
+                case Weaponn.TwoHandSword: SafeSetVisibility(twoHandSword, true); break;
+                case Weaponn.TwoHandSpear: SafeSetVisibility(twoHandSpear, true); break;
+                case Weaponn.TwoHandAxe: SafeSetVisibility(twoHandAxe, true); break;
+                case Weaponn.TwoHandBow: SafeSetVisibility(twoHandBow, true); break;
+                case Weaponn.TwoHandCrossbow: SafeSetVisibility(twoHandCrossbow, true); break;
+                case Weaponn.TwoHandStaff: SafeSetVisibility(staff, true); break;
+                case Weaponn.RightSword: SafeSetVisibility(swordR, true); break;
+                case Weaponn.RightMace: SafeSetVisibility(maceR, true); break;
+                case Weaponn.RightDagger: SafeSetVisibility(daggerR, true); break;
+                case Weaponn.RightItem: SafeSetVisibility(itemR, true); break;
+                case Weaponn.RightPistol: SafeSetVisibility(pistolR, true); break;
+                case Weaponn.Rifle: SafeSetVisibility(rifle, true); break;
+                case Weaponn.RightSpear: SafeSetVisibility(spear, true); break;
             }
         }
     }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Health_Enemy : Health
-{
+{    
     Sequence minAnimation;
     public GameObject UIPos;
     public GameObject minUI;

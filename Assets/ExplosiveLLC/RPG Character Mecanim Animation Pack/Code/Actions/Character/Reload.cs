@@ -7,10 +7,10 @@ namespace RPGCharacterAnims.Actions
         public override bool CanStartAction(RPGCharacterController controller)
         {
             return !controller.isRelaxed &&
-                   (controller.rightWeapon == Weapon.TwoHandCrossbow ||
-                    controller.rightWeapon == Weapon.Rifle ||
-                    controller.rightWeapon == Weapon.RightPistol ||
-                    controller.leftWeapon == Weapon.LeftPistol);
+                   (controller.rightWeapon == Weaponn.TwoHandCrossbow ||
+                    controller.rightWeapon == Weaponn.Rifle ||
+                    controller.rightWeapon == Weaponn.RightPistol ||
+                    controller.leftWeapon == Weaponn.LeftPistol);
         }
 
         protected override void _StartAction(RPGCharacterController controller, EmptyContext context)

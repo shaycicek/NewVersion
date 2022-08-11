@@ -15,7 +15,7 @@ namespace RPGCharacterAnims
 		/// </summary>
 		/// <param name="leftWeapon">Left-hand weapon.</param>
 		/// <param name="rightWeapon">Right-hand weapon.</param>
-		public static AnimatorWeapon ConvertToAnimatorWeapon(Weapon leftWeapon, Weapon rightWeapon)
+		public static AnimatorWeapon ConvertToAnimatorWeapon(Weaponn leftWeapon, Weaponn rightWeapon)
 		{
 			// 2-handed weapon.
 			if (rightWeapon.Is2HandedWeapon()) { return ( AnimatorWeapon )rightWeapon; }
@@ -34,32 +34,32 @@ namespace RPGCharacterAnims
 		/// <param name="weapon">Weapon that's attacking.</param>
 		/// <param name="attackNumber">Attack animation number.</param>
 		/// <returns>Duration in seconds of attack animation.</returns>
-		public static float AttackDuration(Side attackSide, Weapon weapon, int attackNumber)
+		public static float AttackDuration(Side attackSide, Weaponn weapon, int attackNumber)
 		{
 			var duration = 1f;
 
 			switch (attackSide) {
 				case Side.None:						// Unspecified (2-Handed Weapons)
 					switch (weapon) {
-						case Weapon.TwoHandSword:
+						case Weaponn.TwoHandSword:
 							duration = 1.1f;
 							break;
-						case Weapon.TwoHandSpear:
+						case Weaponn.TwoHandSpear:
 							duration = 1.1f;
 							break;
-						case Weapon.TwoHandAxe:
+						case Weaponn.TwoHandAxe:
 							duration = 1.5f;
 							break;
-						case Weapon.TwoHandBow:
+						case Weaponn.TwoHandBow:
 							duration = 0.75f;
 							break;
-						case Weapon.TwoHandCrossbow:
+						case Weaponn.TwoHandCrossbow:
 							duration = 0.75f;
 							break;
-						case Weapon.TwoHandStaff:
+						case Weaponn.TwoHandStaff:
 							duration = 1f;
 							break;
-						case Weapon.Rifle:
+						case Weaponn.Rifle:
 							duration = 1.1f;
 							break;
 						default:
@@ -70,25 +70,25 @@ namespace RPGCharacterAnims
 
 				case Side.Left:						// Left Side
 					switch (weapon) {
-						case Weapon.Unarmed:
+						case Weaponn.Unarmed:
 							duration = 0.75f;
 							break;					// Unarmed  (1-3)
-						case Weapon.Shield:
+						case Weaponn.Shield:
 							duration = 1.1f;
 							break;					// Shield   (1-1)
-						case Weapon.LeftSword:
+						case Weaponn.LeftSword:
 							duration = 0.75f;
 							break;					// L Sword  (1-7)
-						case Weapon.LeftMace:
+						case Weaponn.LeftMace:
 							duration = 0.75f;
 							break;					// L Mace   (1-3)
-						case Weapon.LeftDagger:
+						case Weaponn.LeftDagger:
 							duration = 1f;
 							break;					// L Dagger (1-3)
-						case Weapon.LeftItem:
+						case Weaponn.LeftItem:
 							duration = 1f;
 							break;					// L Item   (1-4)
-						case Weapon.LeftPistol:
+						case Weaponn.LeftPistol:
 							duration = 0.75f;
 							break;					// L Pistol (1-3)
 						default:
@@ -98,25 +98,25 @@ namespace RPGCharacterAnims
 					break;
 				case Side.Right:					// Right Side
 					switch (weapon) {
-						case Weapon.Unarmed:
+						case Weaponn.Unarmed:
 							duration = 0.75f;
 							break;					// Unarmed  (4-6)
-						case Weapon.RightSword:
+						case Weaponn.RightSword:
 							duration = 0.75f;
 							break;					// R Sword  (8-14)
-						case Weapon.RightMace:
+						case Weaponn.RightMace:
 							duration = 0.75f;
 							break;					// R Mace   (4-6)
-						case Weapon.RightDagger:
+						case Weaponn.RightDagger:
 							duration = 1f;
 							break;					// R Dagger (4-6)
-						case Weapon.RightItem:
+						case Weaponn.RightItem:
 							duration = 1f;
 							break;					// R Item   (5-8)
-						case Weapon.RightPistol:
+						case Weaponn.RightPistol:
 							duration = 0.75f;
 							break;					// R Pistol (4-6)
-						case Weapon.RightSpear:
+						case Weaponn.RightSpear:
 							duration = 0.75f;
 							break;					// R Spear  (1-7)
 						default:
@@ -138,7 +138,7 @@ namespace RPGCharacterAnims
 		/// <param name="attackSide">Side of the attack: 0- None, 1- Left, 2- Right, 3- Dual.</param>
 		/// <param name="weaponNumber">Weapon being sheathed.</param>
 		/// <returns>Duration in seconds of sheath animation.</returns>
-		public static float SheathDuration(Side attackSide, Weapon weapon)
+		public static float SheathDuration(Side attackSide, Weaponn weapon)
 		{
 			var duration = 1f;
 
@@ -156,24 +156,24 @@ namespace RPGCharacterAnims
 		/// <param name="sideType">Side of the attack: 0- None, 1- Left, 2- Right, 3- Dual.</param>
 		/// <param name="weapon">Weapon attacking.</param>
 		/// <returns>Attack animation number.</returns>
-		public static int RandomAttackNumber(Side sideType, Weapon weapon)
+		public static int RandomAttackNumber(Side sideType, Weaponn weapon)
 		{
 			switch (sideType) {
 				case Side.None:
 					switch (weapon) {
-						case Weapon.TwoHandSword:
+						case Weaponn.TwoHandSword:
 							return ( int )AnimationVariations.TwoHandedSwordAttacks.TakeRandom();
-						case Weapon.TwoHandSpear:
+						case Weaponn.TwoHandSpear:
 							return ( int )AnimationVariations.TwoHandedSpearAttacks.TakeRandom();
-						case Weapon.TwoHandAxe:
+						case Weaponn.TwoHandAxe:
 							return ( int )AnimationVariations.TwoHandedAxeAttacks.TakeRandom();
-						case Weapon.TwoHandBow:
+						case Weaponn.TwoHandBow:
 							return ( int )AnimationVariations.TwoHandedBowAttacks.TakeRandom();
-						case Weapon.TwoHandCrossbow:
+						case Weaponn.TwoHandCrossbow:
 							return ( int )AnimationVariations.TwoHandedCrossbowAttacks.TakeRandom();
-						case Weapon.TwoHandStaff:
+						case Weaponn.TwoHandStaff:
 							return ( int )AnimationVariations.TwoHandedStaffAttacks.TakeRandom();
-						case Weapon.Rifle:
+						case Weaponn.Rifle:
 							return ( int )AnimationVariations.ShootingAttacks.TakeRandom();
 						default:
 							Debug.LogError($"RPG Character: no weapon number {weapon} for Side 0");
@@ -183,19 +183,19 @@ namespace RPGCharacterAnims
 
 				case Side.Left:
 					switch (weapon) {
-						case Weapon.Unarmed:
+						case Weaponn.Unarmed:
 							return ( int )AnimationVariations.UnarmedLeftAttacks.TakeRandom();
-						case Weapon.Shield:
+						case Weaponn.Shield:
 							return ( int )AnimationVariations.ShieldAttacks.TakeRandom();
-						case Weapon.LeftSword:
+						case Weaponn.LeftSword:
 							return ( int )AnimationVariations.LeftSwordAttacks.TakeRandom();
-						case Weapon.LeftMace:
+						case Weaponn.LeftMace:
 							return ( int )AnimationVariations.LeftMaceAttacks.TakeRandom();
-						case Weapon.LeftDagger:
+						case Weaponn.LeftDagger:
 							return ( int )AnimationVariations.LeftDaggerAttacks.TakeRandom();
-						case Weapon.LeftItem:
+						case Weaponn.LeftItem:
 							return ( int )AnimationVariations.LeftItemAttacks.TakeRandom();
-						case Weapon.LeftPistol:
+						case Weaponn.LeftPistol:
 							return ( int )AnimationVariations.LeftPistolAttacks.TakeRandom();
 						default:
 							Debug.LogError($"RPG Character: no weapon number {weapon} for Side 1 (Left)");
@@ -204,19 +204,19 @@ namespace RPGCharacterAnims
 					break;
 				case Side.Right:
 					switch (weapon) {
-						case Weapon.Unarmed:
+						case Weaponn.Unarmed:
 							return ( int )AnimationVariations.UnarmedRightAttacks.TakeRandom();
-						case Weapon.RightSword:
+						case Weaponn.RightSword:
 							return ( int )AnimationVariations.RightSwordAttacks.TakeRandom();
-						case Weapon.RightMace:
+						case Weaponn.RightMace:
 							return ( int )AnimationVariations.RightMaceAttacks.TakeRandom();
-						case Weapon.RightDagger:
+						case Weaponn.RightDagger:
 							return ( int )AnimationVariations.RightDaggerAttacks.TakeRandom();
-						case Weapon.RightItem:
+						case Weaponn.RightItem:
 							return ( int )AnimationVariations.RightItemAttacks.TakeRandom();
-						case Weapon.RightPistol:
+						case Weaponn.RightPistol:
 							return ( int )AnimationVariations.RightPistolAttacks.TakeRandom();
-						case Weapon.RightSpear:
+						case Weaponn.RightSpear:
 							return ( int )AnimationVariations.RightSpearAttacks.TakeRandom();
 						default:
 							Debug.LogError($"RPG Character: no weapon number {weapon} for Side 2 (Right)");

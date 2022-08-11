@@ -10,7 +10,7 @@ namespace RPGCharacterAnims.Actions
         protected override void _StartAction(RPGCharacterController controller, EmptyContext context)
         {
             var attackNumber = 1;
-            if (controller.rightWeapon == Weapon.Rifle && controller.isHipShooting) { attackNumber = 2; }
+            if (controller.rightWeapon == Weaponn.Rifle && controller.isHipShooting) { attackNumber = 2; }
             controller.Shoot(attackNumber);
         }
     }

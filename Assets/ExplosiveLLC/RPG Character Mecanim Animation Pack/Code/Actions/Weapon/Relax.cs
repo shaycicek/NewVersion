@@ -24,7 +24,7 @@ namespace RPGCharacterAnims.Actions
 
 			// Instant Switch.
 			if (useInstant) {
-				weaponController.InstantWeaponSwitch(Weapon.Relax);
+				weaponController.InstantWeaponSwitch(Weaponn.Relax);
 				return;
 			}
 
@@ -33,23 +33,23 @@ namespace RPGCharacterAnims.Actions
 
 				// Dual sheath.
 				if (controller.leftWeapon.HasEquippedWeapon() && controller.rightWeapon.HasEquippedWeapon())
-				{ weaponController.SheathWeapon(controller.rightWeapon, Weapon.Relax, true); }
+				{ weaponController.SheathWeapon(controller.rightWeapon, Weaponn.Relax, true); }
 
 				// Right sheath.
 				else if (controller.rightWeapon.HasEquippedWeapon())
-				{ weaponController.SheathWeapon(controller.rightWeapon, Weapon.Relax, false); }
+				{ weaponController.SheathWeapon(controller.rightWeapon, Weaponn.Relax, false); }
 
 				// Left sheath.
 				else if (controller.leftWeapon.HasEquippedWeapon())
-				{ weaponController.SheathWeapon(controller.leftWeapon, Weapon.Relax, false); }
+				{ weaponController.SheathWeapon(controller.leftWeapon, Weaponn.Relax, false); }
 
             }
 			// Sheath Unarmed fists.
-			else { weaponController.SheathWeapon(Weapon.Unarmed, Weapon.Relax, false); }
+			else { weaponController.SheathWeapon(Weaponn.Unarmed, Weaponn.Relax, false); }
 
             weaponController.AddCallback(() => {
-                controller.leftWeapon = Weapon.Relax;
-                controller.rightWeapon = Weapon.Relax;
+                controller.leftWeapon = Weaponn.Relax;
+                controller.rightWeapon = Weaponn.Relax;
                 weaponController.SyncWeaponVisibility();
             });
 		}
@@ -57,8 +57,8 @@ namespace RPGCharacterAnims.Actions
         protected override void _EndAction(RPGCharacterController controller)
         {
             // If switching directly from the Relax state, switch to Unarmed.
-            if (controller.leftWeapon == Weapon.Relax || controller.rightWeapon == Weapon.Relax)
-			{ controller.StartAction(HandlerTypes.SwitchWeapon, new SwitchWeaponContext("Unsheath", "Dual", "Back", Weapon.Unarmed, Weapon.Unarmed)); }
+            if (controller.leftWeapon == Weaponn.Relax || controller.rightWeapon == Weaponn.Relax)
+			{ controller.StartAction(HandlerTypes.SwitchWeapon, new SwitchWeaponContext("Unsheath", "Dual", "Back", Weaponn.Unarmed, Weaponn.Unarmed)); }
         }
     }
 }

@@ -146,12 +146,12 @@ namespace RPGCharacterAnims
 			if (!rpgCharacterController.CanStartAction(HandlerTypes.Attack)) { return; }
 
 			if (rpgCharacterController.hasLeftWeapon
-				|| (rpgCharacterController.leftWeapon == Weapon.Unarmed && rpgCharacterController.rightWeapon == Weapon.Unarmed)) {
+				|| (rpgCharacterController.leftWeapon == Weaponn.Unarmed && rpgCharacterController.rightWeapon == Weaponn.Unarmed)) {
 				if (GUI.Button(new Rect(25, 85, 100, 30), "Attack L"))
 				{ rpgCharacterController.StartAction(HandlerTypes.Attack, new AttackContext("Attack", Side.Left)); }
 			}
 			if (rpgCharacterController.hasRightWeapon
-				|| (rpgCharacterController.rightWeapon == Weapon.Unarmed && rpgCharacterController.leftWeapon == Weapon.Unarmed)) {
+				|| (rpgCharacterController.rightWeapon == Weaponn.Unarmed && rpgCharacterController.leftWeapon == Weaponn.Unarmed)) {
 				if (GUI.Button(new Rect(130, 85, 100, 30), "Attack R"))
 				{ rpgCharacterController.StartAction(HandlerTypes.Attack, new AttackContext("Attack", Side.Right)); }
 			}
@@ -162,8 +162,8 @@ namespace RPGCharacterAnims
 			if (rpgCharacterController.hasDualWeapons) {
 
 				// Can't Dual Attack with Item weapons or with a Shield.
-				if (rpgCharacterController.rightWeapon != Weapon.RightItem && rpgCharacterController.leftWeapon != Weapon.LeftItem
-					&& rpgCharacterController.leftWeapon != Weapon.Shield) {
+				if (rpgCharacterController.rightWeapon != Weaponn.RightItem && rpgCharacterController.leftWeapon != Weaponn.LeftItem
+					&& rpgCharacterController.leftWeapon != Weaponn.Shield) {
 					if (GUI.Button(new Rect(235, 85, 100, 30), "Attack Dual"))
 					{ rpgCharacterController.StartAction(HandlerTypes.Attack, new AttackContext("Attack", Side.Dual)); }
 				}
@@ -174,8 +174,8 @@ namespace RPGCharacterAnims
 				{ rpgCharacterController.StartAction(HandlerTypes.Attack, new AttackContext("Special", Side.None)); }
 			}
 			// Sword + Mace Special Attack.
-			if ((rpgCharacterController.leftWeapon == Weapon.LeftSword || rpgCharacterController.leftWeapon == Weapon.LeftMace)
-				&& (rpgCharacterController.rightWeapon == Weapon.RightSword || rpgCharacterController.rightWeapon == Weapon.RightMace)) {
+			if ((rpgCharacterController.leftWeapon == Weaponn.LeftSword || rpgCharacterController.leftWeapon == Weaponn.LeftMace)
+				&& (rpgCharacterController.rightWeapon == Weaponn.RightSword || rpgCharacterController.rightWeapon == Weaponn.RightMace)) {
 				if (GUI.Button(new Rect(335, 85, 100, 30), "Special Attack1"))
 				{ rpgCharacterController.StartAction(HandlerTypes.Attack, new AttackContext("Special", Side.Right)); }
 			}
@@ -346,9 +346,9 @@ namespace RPGCharacterAnims
 
             if (!rpgCharacterController.CanStartAction(HandlerTypes.Cast)) { return; }
 
-            var leftUnarmed = rpgCharacterController.leftWeapon == Weapon.Unarmed;
-            var rightUnarmed = rpgCharacterController.rightWeapon == Weapon.Unarmed;
-            var wieldStaff = rpgCharacterController.rightWeapon == Weapon.TwoHandStaff;
+            var leftUnarmed = rpgCharacterController.leftWeapon == Weaponn.Unarmed;
+            var rightUnarmed = rpgCharacterController.rightWeapon == Weaponn.Unarmed;
+            var wieldStaff = rpgCharacterController.rightWeapon == Weaponn.TwoHandStaff;
 
             if (leftUnarmed && GUI.Button(new Rect(25, 330, 100, 30), "Cast Atk Left"))
 			{ rpgCharacterController.StartAction(HandlerTypes.AttackCast, new AttackCastContext(AnimationVariations.AttackCast.TakeRandom(), Side.Left)); }
@@ -460,7 +460,7 @@ namespace RPGCharacterAnims
 
 			#if ENABLE_INPUT_SYSTEM
 				// Extract the 'InputSystem - Requires InputSystem Package.package' to remove warning about this missing component.
-				var inputController = rpgCharacterController.GetComponent<RPGCharacterInputSystemController>();
+				var inputController = rpgCharacterController.GetComponent<RPGCharacterInputController>();
 			#else
 				var inputController = rpgCharacterController.GetComponent<RPGCharacterInputController>();
 			#endif
@@ -527,14 +527,14 @@ namespace RPGCharacterAnims
 				}
 			}
 			// Switch to Unarmed.
-			if (rpgCharacterController.rightWeapon != Weapon.Unarmed
-				|| rpgCharacterController.leftWeapon != Weapon.Unarmed) {
+			if (rpgCharacterController.rightWeapon != Weaponn.Unarmed
+				|| rpgCharacterController.leftWeapon != Weaponn.Unarmed) {
 				if (GUI.Button(new Rect(1115, 280, 100, 30), "Unarmed")) {
 					doSwitch = true;
 					context.type = "Switch";
 					context.side = "Dual";
-					context.leftWeapon = Weapon.Unarmed;
-					context.rightWeapon = Weapon.Unarmed;
+					context.leftWeapon = Weaponn.Unarmed;
+					context.rightWeapon = Weaponn.Unarmed;
 				}
 			}
 
@@ -549,7 +549,7 @@ namespace RPGCharacterAnims
 						doSwitch = true;
 						context.type = "Switch";
 						context.side = "None";
-						context.leftWeapon = Weapon.Relax;
+						context.leftWeapon = Weaponn.Relax;
 						context.rightWeapon = weapon;
 					}
 				}
@@ -571,7 +571,7 @@ namespace RPGCharacterAnims
 						context.type = "Switch";
 						context.side = "Left";
 						context.leftWeapon = pair.Item1;
-						context.rightWeapon = Weapon.Relax;
+						context.rightWeapon = Weaponn.Relax;
 					}
 				}
 				// Right weapons.
@@ -581,7 +581,7 @@ namespace RPGCharacterAnims
 						doSwitch = true;
 						context.type = "Switch";
 						context.side = "Right";
-						context.leftWeapon = Weapon.Relax;
+						context.leftWeapon = Weaponn.Relax;
 						context.rightWeapon = pair.Item2;
 					}
 				}
@@ -608,8 +608,8 @@ namespace RPGCharacterAnims
 					doSwitch = true;
 					context.type = "Sheath";
 					context.side = "Left";
-					context.leftWeapon = Weapon.Unarmed;
-					context.rightWeapon = Weapon.Relax;
+					context.leftWeapon = Weaponn.Unarmed;
+					context.rightWeapon = Weaponn.Relax;
 				}
 			}
 			// Sheath Right Weapon.
@@ -618,8 +618,8 @@ namespace RPGCharacterAnims
 					doSwitch = true;
 					context.type = "Sheath";
 					context.side = "Right";
-					context.leftWeapon = Weapon.Relax;
-					context.rightWeapon = Weapon.Unarmed;
+					context.leftWeapon = Weaponn.Relax;
+					context.rightWeapon = Weaponn.Unarmed;
 				}
 			}
 

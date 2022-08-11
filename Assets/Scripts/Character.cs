@@ -24,6 +24,7 @@ public class Character : MonoBehaviour
     public bool isAttacking;
     public bool isMoving;
     public bool isStunned;
+    public bool immnuneToKnockBack;
     //Char Variables
     public float damageFactor; // Damage Çarpaný
     public Weapon myWeapon;

@@ -257,12 +257,12 @@ namespace RPGCharacterAnims.Extensions
 		/// <param name="leftWeapon">Left weapon number. Use Weapon.cs enum.</param>
 		/// <param name="rightWeapon">Right weapon number. Use Weapon.cs enum.</param>
 		/// <param name="weaponSide">Weapon side: 0-None, 1-Left, 2-Right, 3-Dual.</param>
-		public static void SetWeapons(this Animator animator, AnimatorWeapon animatorWeapon, int weaponSwitch, Weapon leftWeapon, Weapon rightWeapon, Side weaponSide)
+		public static void SetWeapons(this Animator animator, AnimatorWeapon animatorWeapon, int weaponSwitch, Weaponn leftWeapon, Weaponn rightWeapon, Side weaponSide)
 		{
 			{ animator.SetInteger(AnimationParameters.Weapon, ( int )animatorWeapon); }
 			if (weaponSwitch != -2) { animator.SetInteger(AnimationParameters.WeaponSwitch, weaponSwitch); }
-			if (leftWeapon != Weapon.Relax) { animator.SetInteger(AnimationParameters.LeftWeapon, ( int )leftWeapon); }
-			if (rightWeapon != Weapon.Relax) { animator.SetInteger(AnimationParameters.RightWeapon, ( int )rightWeapon); }
+			if (leftWeapon != Weaponn.Relax) { animator.SetInteger(AnimationParameters.LeftWeapon, ( int )leftWeapon); }
+			if (rightWeapon != Weaponn.Relax) { animator.SetInteger(AnimationParameters.RightWeapon, ( int )rightWeapon); }
 			if (weaponSide != Side.Unchanged) { animator.SetInteger(AnimationParameters.Side, ( int )weaponSide); }
 		}
 	}

@@ -221,7 +221,7 @@ namespace RPGCharacterAnims
 		{
 			get {
 				if (HandlerExists(HandlerTypes.Relax)) { return IsActive(HandlerTypes.Relax); }
-				return rightWeapon == Weapon.Relax && leftWeapon == Weapon.Relax;
+				return rightWeapon == Weaponn.Relax && leftWeapon == Weaponn.Relax;
 			}
 		}
 
@@ -321,13 +321,13 @@ namespace RPGCharacterAnims
 		/// Integer weapon number for the right hand. See the Weapon enum in AnimationData.cs for a
 		/// full list.
 		/// </summary>
-		[HideInInspector] public Weapon rightWeapon = Weapon.Unarmed;
+		[HideInInspector] public Weaponn rightWeapon = Weaponn.Unarmed;
 
 		/// <summary>
 		/// Integer weapon number for the left hand. See the Weapon enum in AnimationData.cs for a
 		/// full list.
 		/// </summary>
-		[HideInInspector] public Weapon leftWeapon = Weapon.Unarmed;
+		[HideInInspector] public Weaponn leftWeapon = Weaponn.Unarmed;
 
 		/// <summary>
 		/// Returns whether a weapon is held in the right hand. This is false if the character is
@@ -354,7 +354,7 @@ namespace RPGCharacterAnims
 		/// <summary>
 		/// Returns whether the character is holding a shield. Shields are held in the left hand.
 		/// </summary>
-		public bool hasShield => leftWeapon == Weapon.Shield;
+		public bool hasShield => leftWeapon == Weaponn.Shield;
 
 		/// <summary>
 		/// Returns whether the character is holding a weapon that can be aimed.
@@ -852,7 +852,7 @@ namespace RPGCharacterAnims
 			animator.TriggerCrawl(CrawlType.StopCrawl);
 
 			if (ikHands) {
-				if (ikHands.isUsed) { ikHands.BlendIK(true, 1, 0.5f, ( Weapon )animator.GetInteger(AnimationParameters.Weapon)); }
+				if (ikHands.isUsed) { ikHands.BlendIK(true, 1, 0.5f, ( Weaponn )animator.GetInteger(AnimationParameters.Weapon)); }
 			}
 		}
 
@@ -878,14 +878,14 @@ namespace RPGCharacterAnims
         /// <param name="leftWeapon">Left side weapon. See Weapon enum in AnimationData.cs.</param>
         /// <param name="rightWeapon">Right-hand weapon. See Weapon enum in AnimationData.cs.</param>
         /// <param name="duration">Duration in seconds that animation is locked.</param>
-        public void Attack(int attackNumber, Side attackSide, Weapon leftWeapon, Weapon rightWeapon, float duration)
+        public void Attack(int attackNumber, Side attackSide, Weaponn leftWeapon, Weaponn rightWeapon, float duration)
         {
 	        animator.SetSide(attackSide);
 			_isAttacking = true;
             Lock(true, true, true, 0, duration);
 
 			// If shooting, use regular or hipshooting attack.
-			if (rightWeapon == Weapon.Rifle) {
+			if (rightWeapon == Weaponn.Rifle) {
 				if (attackSide == Side.None) {
 					if (isHipShooting) { attackNumber = 2; }
 					else { attackNumber = 1; }
@@ -1024,7 +1024,7 @@ namespace RPGCharacterAnims
         {
             animator.SetBool(AnimationParameters.Blocking, false);
             Unlock(true, true);
-			if (hasAimedWeapon) { SetIKOn(( Weapon )animator.GetInteger(AnimationParameters.Weapon)); }
+			if (hasAimedWeapon) { SetIKOn(( Weaponn )animator.GetInteger(AnimationParameters.Weapon)); }
 		}
 
         /// <summary>
@@ -1179,7 +1179,7 @@ namespace RPGCharacterAnims
 			else { animator.SetInteger("Side", 1); }
 			animator.TriggerEmote(EmoteType.Activate);
 			Lock(true, true, true, 0, 1.2f);
-			SetIKPause(rightWeapon == Weapon.TwoHandAxe ? 1.4f : 1f);
+			SetIKPause(rightWeapon == Weaponn.TwoHandAxe ? 1.4f : 1f);
 		}
 
 		/// <summary>
@@ -1416,7 +1416,7 @@ namespace RPGCharacterAnims
 		/// <summary>
 		/// Turns IK to 1 instantly.
 		/// </summary>
-		public void SetIKOn(Weapon weapon)
+		public void SetIKOn(Weaponn weapon)
 		{
 			if (ikHands) {
 				ikHands.canBeUsed = true;

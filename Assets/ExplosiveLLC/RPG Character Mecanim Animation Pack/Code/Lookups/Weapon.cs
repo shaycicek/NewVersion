@@ -1,6 +1,6 @@
 namespace RPGCharacterAnims.Lookups
 {
-    public enum Weapon
+    public enum Weaponn
     {
         Relax = -1,
         Unarmed = 0,

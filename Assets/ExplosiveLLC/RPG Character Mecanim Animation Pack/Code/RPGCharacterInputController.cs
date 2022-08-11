@@ -201,7 +201,7 @@ namespace RPGCharacterAnims
 					if (HasAimInput()) { rpgCharacterController.TryStartAction(HandlerTypes.Aim); }
 					else { rpgCharacterController.TryEndAction(HandlerTypes.Aim); }
 				}
-                if (rpgCharacterController.rightWeapon == Weapon.TwoHandBow) {
+                if (rpgCharacterController.rightWeapon == Weaponn.TwoHandBow) {
 
                     // If using the bow, we want to pull back slowly on the bow string while the
                     // Left Mouse button is down, and shoot when it is released.
@@ -327,29 +327,29 @@ namespace RPGCharacterAnims
 
 			var doSwitch = false;
 			var context = new SwitchWeaponContext();
-			var weaponNumber = Weapon.Unarmed;
+			var weaponNumber = Weaponn.Unarmed;
 
 			// Switch to Shield.
 			if (inputShield) {
 				doSwitch = true;
 				context.side = "Left";
 				context.type = "Switch";
-				context.leftWeapon = Weapon.Shield;
-				context.rightWeapon = Weapon.Relax;
+				context.leftWeapon = Weaponn.Shield;
+				context.rightWeapon = Weaponn.Relax;
 				rpgCharacterController.StartAction(HandlerTypes.SwitchWeapon, context);
 				return;
 			}
 
 			// Cycle through 2Handed weapons if any input happens on the up-down axis.
 			if (Mathf.Abs(inputSwitchUpDown) > 0.1f) {
-				var twoHandedWeapons = new Weapon[] {
-					Weapon.TwoHandSword,
-					 Weapon.TwoHandSpear,
-					 Weapon.TwoHandAxe,
-					 Weapon.TwoHandBow,
-					 Weapon.TwoHandCrossbow,
-					 Weapon.TwoHandStaff,
-					 Weapon.Rifle,
+				var twoHandedWeapons = new Weaponn[] {
+					Weaponn.TwoHandSword,
+					 Weaponn.TwoHandSpear,
+					 Weaponn.TwoHandAxe,
+					 Weaponn.TwoHandBow,
+					 Weaponn.TwoHandCrossbow,
+					 Weaponn.TwoHandStaff,
+					 Weaponn.Rifle,
 				};
 				// If we're not wielding 2Handed weapon already, just switch to the first one in the list.
 				if (System.Array.IndexOf(twoHandedWeapons, rpgCharacterController.rightWeapon) == -1)
@@ -366,7 +366,7 @@ namespace RPGCharacterAnims
 				doSwitch = true;
 				context.type = HandlerTypes.Switch;
 				context.side = "None";
-				context.leftWeapon = Weapon.Relax;
+				context.leftWeapon = Weaponn.Relax;
 				context.rightWeapon = weaponNumber;
 			}
 
@@ -381,7 +381,7 @@ namespace RPGCharacterAnims
 
 					// If we are not wielding a left-handed weapon, switch to Left Sword.
 					if (Array.IndexOf(WeaponGroupings.LeftHandedWeapons, leftWeaponType) == -1)
-					{ weaponNumber = Weapon.LeftSword; }
+					{ weaponNumber = Weaponn.LeftSword; }
 
 					// Otherwise, cycle through the list.
 					else {
@@ -391,7 +391,7 @@ namespace RPGCharacterAnims
 
 					context.side = "Left";
 					context.leftWeapon = weaponNumber;
-					context.rightWeapon = Weapon.Relax;
+					context.rightWeapon = Weaponn.Relax;
 				}
 				// Right-handed weapons.
 				else if (inputSwitchLeftRight > 0.1f) {
@@ -399,7 +399,7 @@ namespace RPGCharacterAnims
 
 					// If we are not wielding a right-handed weapon, switch to Unarmed.
 					if (Array.IndexOf(WeaponGroupings.RightHandedWeapons, rightWeaponType) == -1)
-					{ weaponNumber = Weapon.Unarmed; }
+					{ weaponNumber = Weaponn.Unarmed; }
 
 					// Otherwise, cycle through the list.
 					else {
@@ -407,7 +407,7 @@ namespace RPGCharacterAnims
 						weaponNumber = WeaponGroupings.RightHandedWeapons[(currentIndex + 1) % WeaponGroupings.RightHandedWeapons.Length];
 					}
 					context.side = "Right";
-					context.leftWeapon = Weapon.Relax;
+					context.leftWeapon = Weaponn.Relax;
 					context.rightWeapon = weaponNumber;
 				}
 			}
