@@ -6,12 +6,17 @@ public class Character : MonoBehaviour
 {
     public enum CharacterClasses
     {
-        Ally_Sorcerer,
         Ally_Basic,
+        Ally_Melee,
+        Ally_Archer,
+        Ally_Sorcerer,        
+        Ally_Rally,
+        Ally_Fearmancer,
+        Ally_Buff,
+        Ally_Engineer,
         Player,
         Enemy_Melee,
-        Enemy_Caster,
-        Enemy_Bazooka,
+        Enemy_Caster,        
         Enemy_Basic
     }
     public CharacterClasses characterClasses;
@@ -56,11 +61,16 @@ public class Character : MonoBehaviour
     public void Attack ()
     {
         timer += Time.deltaTime;
-        if (timer>=attackRateFactor*myWeapon.AttackRate) {            
+        if (timer>=attackRateFactor*myWeapon.AttackRate) {
             //mainCharacter.LookAt(FindClosestEnemy(transform.position, myWeapon.range).position);
+            isAttacking = true;
             myWeapon.InitializeWeapon(this, enemy, damageFactor);
             myWeapon.Attack();
             timer = 0;
+        }
+        else
+        {
+            isAttacking = false;
         }
     }
 
