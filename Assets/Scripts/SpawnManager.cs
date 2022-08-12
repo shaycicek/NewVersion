@@ -97,6 +97,33 @@ public class SpawnManager : MonoBehaviour
         
     }
 
+    public void TestSpawn(GameObject spawn)
+    {
+        randomPos = Camera.main.ViewportToWorldPoint(RandomPosOutsideOfCam());
+        randomPos.y = 0;
+
+        while (Physics.OverlapSphere(randomPos + new Vector3(0, 1f, 0), 0.2f).Length > 0)
+        {
+            randomPos = Camera.main.ViewportToWorldPoint(RandomPosOutsideOfCam());
+            randomPos = new Vector3(randomPos.x, 0, randomPos.z);
+        }
+        Character enemy = spawn.GetComponent<Character>();
+        enemy.Initialize(Stats.instance.enemyHP, Stats.instance.enemyDFactor, enemy.movementSpeed, enemy.attackRange, enemy.sightRange);
+        enemy.gameObject.SetActive(true);
+        if (GameManager.instance.gameModes == GameManager.GameModes.Survivor)
+        {
+            enemy.transform.parent = levelParent;
+        }
+        else if (GameManager.instance.gameModes == GameManager.GameModes.Wave)
+        {
+            enemy.transform.parent = mainFloorParent;
+        }
+        GameManager.instance.enemyList.Add(enemy);  // Düþmaný Listeye ekle           
+        enemy.transform.position = randomPos;
+        totalNumberEnemiesInScene++;
+        GameManager.instance.count++;
+    }
+
     public void SpawnMineral()
     {
         randomPos = Random.insideUnitSphere * Radius;

@@ -4863,7 +4863,7 @@ GameObject:
   - component: {fileID: 135746135312732826}
   - component: {fileID: 2060271356618753554}
   m_Layer: 0
-  m_Name: Projectile 13
+  m_Name: ArcherProj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

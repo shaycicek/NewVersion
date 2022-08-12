@@ -102,3 +102,4 @@ MonoBehaviour:
   character: {fileID: 0}
   damageFactor: 1
   bulletHole: {fileID: 3284195907259357102}
+  damage: 0

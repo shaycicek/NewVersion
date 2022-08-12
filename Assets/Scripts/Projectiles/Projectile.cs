@@ -13,12 +13,6 @@ public class Projectile : MonoBehaviour
     public LayerMask enemy;
     private Health hitCharacter;
     public float lifetime;
-    
-    private void Start()
-    {
-        CinemachineShake.Instance.ShakeCamera(cameraShakeIntensity, cameraShakeTime);
-        Destroy(gameObject, lifetime);
-    }
 
     public void OnTriggerEnter(Collider other)
     {     
@@ -35,6 +29,12 @@ public class Projectile : MonoBehaviour
         model.SetActive(false);
         Destroy(gameObject,.2f);
     } 
+
+    public void ProjectileStart()
+    {
+        CinemachineShake.Instance.ShakeCamera(cameraShakeIntensity, cameraShakeTime);
+        Destroy(gameObject, lifetime);
+    }
 
     public void Initialize(LayerMask enemy, float damageFactor, Weapon weapon)
     {

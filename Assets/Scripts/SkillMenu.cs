@@ -55,25 +55,12 @@ public class SkillMenu : MonoBehaviour
         skills.Add(novaSkill);
         skills.Add(dashSkill);
         skills.Add(whirlWind);
-        Debug.Log("MenuStart 1."+skills[0]);
-        Debug.Log("MenuStart 1."+skills[0].useCost);
-        Debug.Log("MenuStart 2." + skills[1]);
-        Debug.Log("MenuStart 2." + skills[1].useCost);
-        Debug.Log("MenuStart 3." + skills[2]);
-        Debug.Log("MenuStart 3." + skills[2].useCost);
-        Debug.Log("skill button i= " + 0 + " " + skillButtons[0]);
         skillButtons[0].SetSkill(skills[0]);
-        Debug.Log("skill button i= " + 1 + " " + skillButtons[1]);
         skillButtons[0].SetSkill(skills[1]);
-        Debug.Log("skill button i= " + 2 + " " + skillButtons[2]);
         skillButtons[0].SetSkill(skills[2]);
         for (int i = 0; i < skillButtons.Count; i++)
         {
-            Debug.Log("skill buttons count" + skillButtons.Count);            
-            Debug.Log("SkillMenuFor0");
             Skill s = skills[i];
-            Debug.Log("Skillmenu"+skills[i]);
-            Debug.Log("Skillmenu + skill button i= " +i+" "+ skillButtons[i]);
             skillButtons[i].SetSkill(s);
 
         }

@@ -8,7 +8,6 @@ public class Weapon_Melee : Weapon
 
     public override void Attack()
     {
-        Debug.Log(character.FindClosestEnemy(transform.position, range));
         character.FindClosestEnemy(transform.position, range).gameObject.GetComponent<Health>().GetDamage(damage * damageFactor);
     }
 }

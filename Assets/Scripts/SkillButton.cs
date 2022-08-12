@@ -20,9 +20,6 @@ public class SkillButton : MonoBehaviour, IDeselectHandler, IPointerDownHandler,
     public void SetSkill(Skill skill)
     {
         mySkill = skill;
-        Debug.Log("setskill "+ text);
-        Debug.Log("set skill " + skill);
-
         /*
         GetComponent<Button>().onClick.AddListener(() => {
             mySkill.UseSkill();

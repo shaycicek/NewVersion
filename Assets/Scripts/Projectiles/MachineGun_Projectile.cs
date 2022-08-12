@@ -10,6 +10,7 @@ public class MachineGun_Projectile : Projectile
 
     private void Start()
     {
+        ProjectileStart();
         onFireParticle.gameObject.SetActive(true);
         GetComponent<Rigidbody>().AddForce(-weapon.transform.forward * speed, ForceMode.Impulse);
     }
